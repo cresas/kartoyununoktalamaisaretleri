@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Etkileşimli Noktalama Kartları</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f8ff;
+    }
+
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(4, 200px); /* 4 kart yan yana */
+      gap: 40px; /* Kartlar arasındaki boşluğu artırdık */
+      justify-content: center;
+      row-gap: 40px; /* Satır aralarındaki boşluğu artırdık */
+    }
+
+    .card {
+      width: 200px;
+      height: 280px;
+      perspective: 1000px;
+      cursor: pointer;
+      transition: box-shadow 0.3s ease-in-out;
+      box-sizing: border-box; /* Padding ve border'ı dışta hesaplar */
+    }
+
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    .card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #333;
+      border-radius: 12px;
+      background: white;
+      padding: 20px;
+      box-sizing: border-box; /* Padding ve border'ı dışta hesaplar */
+    }
+
+    .card-front {
+      background-color: #ffdf91;
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
+      flex-direction: column;
+      background-color: #ffffff;
+    }
+
+    .sentence {
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+
+    .options button {
+      margin: 4px;
+      padding: 8px 12px;
+      font-size: 18px;
+      border-radius: 6px;
+      border: 1px solid #888;
+      cursor: pointer;
+      background-color: #eef;
+    }
+
+    .options button.correct {
+      background-color: #c4f2c4;
+    }
+
+    .options button.incorrect {
+      background-color: #f2c4c4;
+    }
+
+    /* Media Query - Mobil Uyumluluk için */
+    @media (max-width: 768px) {
+      .card-container {
+        grid-template-columns: repeat(2, 1fr); /* Ekran küçüldüğünde 2 kart göster */
+        gap: 20px; /* Kartlar arasındaki boşluk azalacak */
+      }
+
+      .card {
+        width: 100%; /* Kartlar daha geniş olacak */
+        height: auto; /* Yüksekliği otomatik olarak ayarlayacak */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .card-container {
+        grid-template-columns: 1fr; /* Ekran çok küçüldüğünde sadece 1 kart göster */
+        gap: 10px; /* Kartlar arasındaki boşluk daha da azalacak */
+      }
+
+      .card {
+        width: 100%; /* Kartlar ekranın tamamını kaplayacak */
+        height: auto;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="card-container">
+  <script>
+    // Ses dosyalarının yerel yolu
+    const correctSound = new Audio('assets/sounds/correct.mp3');
+    const incorrectSound = new Audio('assets/sounds/incorrect.mp3');
+    const flipSound = new Audio('assets/sounds/flip.mp3');
+
+    const cardsData = [
+      {sentence: "Atatürk, çocukları çok severdi (…) ", options: ["?", ".", "!"], answer: "."},
+      {sentence: "Silah taşıyamazsam size mermi taşı(…)", options: [".", ",", "-"], answer: "-"},
+      {sentence: "1 (…) sınıfa başladığımda kimseyi tanımıyordum.", options: [",", ".", "-"], answer: "."},
+      {sentence: "Ayşe (…) Hasan (…) Duygu ve ben poster hazırladık.", options: ["-", ".", ","], answer: ","},
+      {sentence: "KAL(…)Bİ(…)MİZ(…)DE(…)SİN", options: ["-", ".", ","], answer: "-"},
+      {sentence: "Tüh (…) O kadar da hazırlık yapmıştık.", options: ["?", "!", ","], answer: "!"},
+      {sentence: "Yarın 09(…)05’te çelenk koymaya gideceğiz.", options: [".", ",", "-"], answer: "."},
+      {sentence: "Bayrak törenlerinde hangi marş okunur (…) ", options: ["!", ".", "?"], answer: "?"},
+    ];
+
+    cardsData.forEach((card, index) => {
+      document.querySelector('.card-container').innerHTML += `
+      <div class="card" onclick="flipCard(this)" ontouchstart="flipCard(this)">
+        <div class="card-inner">
+          <div class="card-front">Kart ${index + 1}</div>
+          <div class="card-back">
+            <div class="sentence">${card.sentence}</div>
+            <div class="options">
+              ${card.options.map(opt => `<button onclick="checkAnswer(event, '${opt}', '${card.answer}', this)">${opt}</button>`).join('')}
+            </div>
+          </div>
+        </div>
+      </div>`;
+    });
+
+    function flipCard(cardElement) {
+      if (cardElement.classList.contains('answered')) return;
+      cardElement.classList.toggle('flipped');
+      flipSound.play(); // Kart çevirme sesi
+    }
+
+    function checkAnswer(event, selected, correct, button) {
+      event.stopPropagation();
+      const options = button.parentElement.querySelectorAll('button');
+
+      // Eğer daha önce doğru veya yanlış yapıldıysa kart tekrar dönmesin
+      if (button.classList.contains('correct') || button.classList.contains('incorrect')) {
+        return;
+      }
+
+      options.forEach(btn => btn.disabled = true);  // Seçenekleri devre dışı bırak
+
+      if (selected === correct) {
+        button.classList.add('correct');
+        correctSound.play(); // Doğru cevap sesi
+        button.closest('.card').classList.add('answered');
+        // Doğru cevaptan sonra yeşil glow efekti ekle
+        button.closest('.card').style.boxShadow = '0 0 15px 5px rgba(0, 255, 0, 0.6)';
+      } else {
+        button.classList.add('incorrect');
+        incorrectSound.play(); // Yanlış cevap sesi
+
+        setTimeout(() => {
+          // Yanlış cevap verildiğinde kart geri dönsün
+          button.closest('.card').classList.remove('flipped');
+          
+          // Yanlış cevap verildikten sonra kırmızı renk sıfırlanacak
+          options.forEach(btn => btn.classList.remove('incorrect')); // Kırmızı rengi kaldır
+          options.forEach(btn => btn.disabled = false); // Seçenekleri yeniden aktif hale getir
+        }, 600); // Kartın ters dönmesi için biraz bekleyelim
+      }
+    }
+  </script>
+</div>
+
+</body>
+</html>
