@@ -6,8 +6,8 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>🎯 Noktalama Kartları v3.0 - YENİ</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>🎯 Noktalama Kartları </title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;600;700;800&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         @charset "UTF-8";
         
@@ -20,8 +20,8 @@
         }
 
         body {
-            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-            background: linear-gradient(000000, #000000 0%, #000000 100%);
+            font-family: 'Open Sans', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
@@ -161,7 +161,7 @@
                 rgba(255, 105, 180, 0.1) 70%, 
                 transparent 100%
             );
-            animation: lightSweep 5s ease-in-out 1.5s forwards;
+            animation: lightSweep 2s ease-in-out 1.5s forwards;
             z-index: 10;
         }
 
@@ -191,6 +191,37 @@
             100% {
                 transform: scale(3);
                 opacity: 0;
+            }
+        }
+
+        .thx-skip {
+            position: absolute;
+            bottom: 50px;
+            right: 50px;
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.5);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            z-index: 2001;
+        }
+
+        .thx-skip:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .thx-skip {
+                bottom: 30px;
+                right: 30px;
+                padding: 8px 16px;
+                font-size: 0.8rem;
             }
         }
 
@@ -345,7 +376,7 @@
             border: none;
             border-radius: 8px;
             padding: 20px 50px;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Open Sans', sans-serif;
             font-size: 1.8rem;
             font-weight: 600;
             cursor: pointer;
@@ -365,7 +396,7 @@
             border: none;
             border-radius: 50px;
             padding: 18px 40px;
-            font-family: 'Fredoka', cursive;
+            font-family: 'Open Sans', 'Fredoka', cursive;
             font-size: 1.4rem;
             font-weight: 500;
             color: white;
@@ -430,14 +461,152 @@
             transition: width 0.5s ease;
         }
 
-        /* Cards Container */
+        /* Cards Container - ULTIMATE RESPONSIVE SYSTEM */
+        /* Base - Large desktop (1850px+) */
         .cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+            display: grid !important;
+            grid-template-columns: repeat(4, 1fr) !important;
+            gap: 25px !important;
+            max-width: 1400px !important;
+            margin: 0 auto !important;
+            padding: 40px 20px !important;
+            width: 100% !important;
+            justify-items: center !important;
+            align-items: center !important;
+            place-items: center !important;
+        }
+
+        /* Large Desktop responsive (1080-1849px) - FIX FOR SOL ÜSTTE */
+        @media (max-width: 1849px) and (min-width: 1080px) {
+            .cards-container {
+                display: grid !important;
+                grid-template-columns: repeat(4, 1fr) !important;
+                gap: 25px !important;
+                max-width: 1200px !important;
+                margin: 0 auto !important;
+                padding: 30px 20px !important;
+                width: 100% !important;
+                justify-items: center !important;
+                align-items: center !important;
+                place-items: center !important;
+                justify-content: center !important;
+            }
+            
+            .card {
+                max-width: 280px !important;
+                width: 100% !important;
+                margin: 0 auto !important;
+            }
+            
+            .card.dealt {
+                transform: translateX(0) translateY(0) scale(1) rotateY(0deg) !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                margin: 0 auto !important;
+                width: 100% !important;
+                max-width: 280px !important;
+            }
+        }
+
+        /* Medium Desktop responsive (768-1080px) - FIX FOR SOLDA DİBİNDE */
+        @media (max-width: 1080px) and (min-width: 768px) {
+            .cards-container {
+                display: grid !important;
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 20px !important;
+                max-width: 900px !important;
+                margin: 0 auto !important;
+                padding: 25px 15px !important;
+                width: 100% !important;
+                justify-items: center !important;
+                align-items: center !important;
+                place-items: center !important;
+                justify-content: center !important;
+            }
+            
+            .card {
+                max-width: 260px !important;
+                width: 100% !important;
+                margin: 0 auto !important;
+            }
+            
+            .card.dealt {
+                transform: translateX(0) translateY(0) scale(1) rotateY(0deg) !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                margin: 0 auto !important;
+                width: 100% !important;
+                max-width: 260px !important;
+            }
+        }
+
+        /* Mobile responsive for cards */
+        @media (max-width: 768px) {
+            .cards-container {
+                display: grid !important;
+                grid-template-columns: 1fr !important;
+                gap: 20px;
+                padding: 15px;
+                max-width: 100% !important;
+                width: 100% !important;
+                margin: 0 auto;
+                justify-items: center !important;
+                align-items: center !important;
+                justify-content: center !important;
+            }
+            
+            .card {
+                max-width: 280px;
+                width: 100% !important;
+                margin: 0 auto !important;
+                transform: translateX(-2000vw) translateY(-2000vh) scale(0.1) rotateY(180deg) !important;
+                opacity: 0 !important;
+                visibility: hidden !important;
+            }
+            
+            .card.dealt {
+                transform: translateX(0) translateY(0) scale(1) rotateY(0deg) !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                margin: 0 auto !important;
+                width: 100% !important;
+                max-width: 280px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cards-container {
+                display: grid !important;
+                grid-template-columns: 1fr !important;
+                padding: 10px;
+                gap: 15px;
+                max-width: 100% !important;
+                width: 100% !important;
+                margin: 0 auto;
+                justify-items: center !important;
+                align-items: center !important;
+                justify-content: center !important;
+            }
+            
+            .card {
+                max-width: 260px;
+                height: 320px;
+                width: 100% !important;
+                margin: 0 auto !important;
+                transform: translateX(-3000vw) translateY(-3000vh) scale(0.1) rotateY(180deg) !important;
+                opacity: 0 !important;
+                visibility: hidden !important;
+            }
+            
+            .card.dealt {
+                transform: translateX(0) translateY(0) scale(1) rotateY(0deg) !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                margin: 0 auto !important;
+                width: 100% !important;
+                max-width: 260px !important;
+                height: 320px !important;
+            }
         }
 
         /* Card Styles */
@@ -485,6 +654,81 @@
                 opacity: 1;
                 transform: translateX(0) translateY(0) scale(1) rotateY(0deg);
                 z-index: 1;
+            }
+        }
+
+        /* Mobile card dealing animation */
+        @media (max-width: 768px) {
+            @keyframes cardDealFlip {
+                0% {
+                    opacity: 0;
+                    transform: translateX(-5000vw) translateY(-5000vh) scale(0.1) rotateY(180deg);
+                    z-index: 10;
+                    visibility: hidden;
+                }
+                15% {
+                    opacity: 0;
+                    transform: translateX(-3000vw) translateY(-3000vh) scale(0.2) rotateY(160deg);
+                    z-index: 10;
+                    visibility: visible;
+                }
+                25% {
+                    opacity: 1;
+                    transform: translateX(-200vw) translateY(-75vh) scale(0.6) rotateY(135deg);
+                    z-index: 9;
+                }
+                50% {
+                    opacity: 1;
+                    transform: translateX(-100vw) translateY(-37vh) scale(0.8) rotateY(90deg);
+                    z-index: 8;
+                }
+                80% {
+                    opacity: 1;
+                    transform: translateX(-20vw) translateY(-7vh) scale(0.95) rotateY(45deg);
+                    z-index: 5;
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateX(0) translateY(0) scale(1) rotateY(0deg);
+                    z-index: 1;
+                }
+            }
+        }
+
+        @media (max-width: 480px) {
+            @keyframes cardDealFlip {
+                0% {
+                    opacity: 0;
+                    transform: translateX(-6000vw) translateY(-6000vh) scale(0.1) rotateY(180deg);
+                    z-index: 10;
+                    visibility: hidden;
+                }
+                10% {
+                    opacity: 0;
+                    transform: translateX(-4000vw) translateY(-4000vh) scale(0.15) rotateY(170deg);
+                    z-index: 10;
+                    visibility: visible;
+                }
+                25% {
+                    opacity: 1;
+                    transform: translateX(-250vw) translateY(-100vh) scale(0.6) rotateY(135deg);
+                    z-index: 9;
+                }
+                50% {
+                    opacity: 1;
+                    transform: translateX(-125vw) translateY(-50vh) scale(0.8) rotateY(90deg);
+                    z-index: 8;
+                }
+                80% {
+                    opacity: 1;
+                    transform: translateX(-25vw) translateY(-10vh) scale(0.95) rotateY(45deg);
+                    z-index: 5;
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateX(0) translateY(0) scale(1) rotateY(0deg);
+                    z-index: 1;
+                }
             }
         }
 
@@ -624,10 +868,11 @@
         }
 
         .punctuation-btn.correct {
-            background: linear-gradient(135deg, #1EDD88, #56CCA3) !important;
-            border-color: #1EDD88 !important;
+            background: linear-gradient(135deg, #28A745, #20C997) !important;
+            border-color: #28A745 !important;
             animation: correctPulse 0.6s ease;
-            box-shadow: 0 0 20px rgba(30, 221, 136, 0.6) !important;
+            box-shadow: 0 0 20px rgba(40, 167, 69, 0.6) !important;
+            color: white !important;
         }
 
         .punctuation-btn.incorrect {
@@ -741,13 +986,20 @@
             box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6);
         }
 
-        /* Mobile Responsive - Improved */
+        /* Mobile Responsive - Improved - OVERRIDE */
         @media (max-width: 768px) {
             .cards-container {
-                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-                gap: 15px;
-                padding: 10px;
-                max-width: 95vw; /* More space efficient */
+                display: grid !important;
+                grid-template-columns: 1fr !important;
+                gap: 20px !important;
+                padding: 15px !important;
+                max-width: 100% !important;
+                width: 100% !important;
+                margin: 0 auto !important;
+                justify-items: center !important;
+                align-items: center !important;
+                justify-content: center !important;
+                place-items: center !important;
             }
             
             .card {
@@ -841,11 +1093,13 @@
             <div id="thx-star"></div>
             <div class="light-sweep"></div>
         </div>
+     
     </div>
 
     <!-- EA Games Logo Intro -->
     <div class="ea-logo-intro" id="eaLogoIntro">
         <img src="logo.png" alt="Logo" id="logoImage">
+       
     </div>
 
     <!-- First Simple Start Screen -->
@@ -870,7 +1124,7 @@
     <!-- Game Screen -->
     <div class="game-screen" id="gameScreen">
         <div class="game-header">
-            <h1 class="game-title">🎯 Noktalama Kartları</h1>
+       
             <p class="game-instructions">Kartlara tıklayarak çevirin ve doğru noktalama işaretini seçin</p>
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill"></div>
@@ -888,9 +1142,14 @@
         <p style="color: white; font-size: 1.5rem; text-align: center; margin-bottom: 20px;">
             Tüm soruları doğru cevapladınız!
         </p>
-        <button class="restart-button">
+        <button class="restart-button" onclick="window.restartGame(); return false;">
             🔄 Tekrar Oyna
         </button>
+        <div style="margin-top: 20px;">
+            <button onclick="window.location.reload(); return false;" style="background: rgba(255,255,255,0.2); border: 2px solid white; color: white; padding: 10px 20px; border-radius: 10px; cursor: pointer;">
+                🔄 Sayfayı Yenile
+            </button>
+        </div>
     </div>
 
     <script>
@@ -953,6 +1212,82 @@
             dealcard: 'assets/dealcard.mp3',
             thx: 'assets/thx.mp3'
         };
+
+        // Skip Intro Function - ULTIMATE VERSION - Directly starts game
+        function skipIntro() {
+            console.log('🚀 ULTIMATE SKIP: Bypassing ALL intros, going directly to game...');
+            
+            // Stop THX.mp3 specifically first
+            try {
+                if (window.thxAudio) {
+                    window.thxAudio.pause();
+                    window.thxAudio.currentTime = 0;
+                    window.thxAudio.src = '';
+                    window.thxAudio = null;
+                }
+            } catch(e) {}
+            
+            // NUCLEAR AUDIO STOP - Stop every possible audio source
+            document.querySelectorAll('audio').forEach(audio => {
+                audio.pause();
+                audio.currentTime = 0;
+                audio.src = '';
+                audio.load(); // Force reload to clear
+                audio.volume = 0; // Mute completely
+                audio.muted = true;
+            });
+            
+            // Stop ALL Web Audio API contexts if any
+            if (window.AudioContext || window.webkitAudioContext) {
+                try {
+                    if (window.audioContext) {
+                        window.audioContext.suspend();
+                        window.audioContext.close();
+                    }
+                } catch(e) {}
+            }
+            
+            // BRUTE FORCE: Clear ALL possible timers and intervals
+            for (let i = 1; i < 999999; i++) {
+                window.clearTimeout(i);
+                window.clearInterval(i);
+            }
+            
+            // Hide ALL intro screens immediately and completely
+            const thxIntro = document.getElementById('thx-intro');
+            const eaLogoIntro = document.getElementById('eaLogoIntro');
+            const gameIntroScreen = document.getElementById('gameIntroScreen');
+            const entranceScreen = document.getElementById('entranceScreen');
+            
+            // Force hide all intros
+            [thxIntro, eaLogoIntro, gameIntroScreen, entranceScreen].forEach(element => {
+                if (element) {
+                    element.style.display = 'none';
+                    element.style.opacity = '0';
+                    element.style.visibility = 'hidden';
+                    element.style.zIndex = '-9999';
+                    element.classList.add('hidden');
+                }
+            });
+            
+            // DIRECT GAME START - Bypass all intro sequences
+            setTimeout(() => {
+                // Show game screen immediately
+                const gameScreen = document.getElementById('gameScreen');
+                if (gameScreen) {
+                    gameScreen.classList.add('visible');
+                    gameScreen.style.opacity = '1';
+                    gameScreen.style.display = 'block';
+                }
+                
+                // Start the card game immediately
+                setTimeout(() => {
+                    createCards();
+                }, 100);
+            }, 50);
+            
+            console.log('🎯 ULTIMATE SKIP COMPLETED: Game started directly!');
+        }
 
         // THX Star Animation Functions
         function createThxIntro() {
@@ -1489,10 +1824,32 @@
 
         // Auto-load but wait for user interaction to start THX intro
         document.addEventListener('DOMContentLoaded', () => {
-            console.log('🎮 Game loaded successfully');
+            console.log('🎮 Game loaded successfully - VERSION 3.0');
+            console.log('📝 Changes: No green cards, gold correct answers, enhanced restart');
             
             // Enable audio context for modern browsers
             enableAudioContext();
+            
+            // Make restart function globally available
+            window.restartGame = restartGame;
+            
+            // Debug function for console testing
+            window.testRestart = function() {
+                console.log('🧪 TEST: Manual restart triggered');
+                restartGame();
+            };
+            
+            // Debug function to check game state
+            window.checkGameState = function() {
+                console.log('🔍 Game State Check:');
+                console.log('- currentCard:', currentCard);
+                console.log('- correctAnswers:', correctAnswers);
+                console.log('- Cards container children:', document.getElementById('cardsContainer').children.length);
+                console.log('- Success screen visible:', document.getElementById('successScreen').classList.contains('show'));
+                console.log('- Restart button exists:', !!document.querySelector('.restart-button'));
+            };
+            
+            console.log('🔧 Debug functions available: window.testRestart(), window.checkGameState()');
             
             // Add event listener for restart button - use delegation for reliability
             document.addEventListener('click', (e) => {
